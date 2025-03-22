@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now - SeekSpot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #2b5876, #4e4376);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Booking Container */
+.booking-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+}
+
+/* Title */
+.title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Styling */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input,
+.input-group select {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #2b5876;
+    outline: none;
+}
+
+/* Readonly Amount Field */
+#amount {
+    background: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+    color: #2b5876;
+}
+
+/* Button */
+.book-btn {
+    background: #ff5e62;
+    color: white;
+    padding: 12px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.book-btn:hover {
+    background: #320ca4;
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .booking-container {
+        width: 90%;
+    }
+}
+
+    </style>
+
+    <div class="booking-container">
+        <h1 class="title">Book Your Trip</h1>
+
+        <div class="booking-form">
+            <form action="confirm.html" method="POST">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="destination">Select Destination</label>
+                    <select id="destination" required onchange="calculatePrice()">
+                        <option value="">Choose a Destination</option>
+                        <option value="Bali" data-price="500">Thanjavur - 500</option>
+                        
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="date">Travel Date</label>
+                    <input type="date" id="date" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="people">Number of People</label>
+                    <input type="number" id="people" min="1" value="1" required onchange="calculatePrice()">
+                </div>
+
+                <!-- Amount to Pay Section -->
+                <div class="input-group">
+                    <label>Total Amount to Pay</label>
+                    <input type="text" id="amount" readonly>
+                </div>
+
+                <button type="button" class="book-btn" onclick="redirectToSuccess()">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function calculatePrice() {
+            let destination = document.getElementById("destination");
+            let people = document.getElementById("people").value;
+            let selectedOption = destination.options[destination.selectedIndex];
+
+            if (selectedOption.dataset.price) {
+                let pricePerPerson = parseInt(selectedOption.dataset.price);
+                let totalPrice = pricePerPerson * people;
+                document.getElementById("amount").value = "rupees" + totalPrice;
+            }
+        }
+        function redirectToSuccess() {
+        alert("Payment Processing... ✅");
+        setTimeout(() => {
+            window.location.href = "success.html";
+        }, 2000); // Redirect after 2 seconds
+    }
+    </script>
+
+</body>
+</html>

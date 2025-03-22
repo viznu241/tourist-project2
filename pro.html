@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        .success-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.success-container h1 {
+    color: #2b5876;
+    font-size: 2.5rem;
+}
+
+.success-container p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.details-box {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.details-box p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.print-btn, .home-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 12px;
+    font-size: 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 80%;
+}
+
+.print-btn {
+    background: #ff5e62;
+    color: white;
+    border: none;
+}
+
+.print-btn:hover {
+    background: #d53f3a;
+}
+
+.home-btn {
+    background: #320ca4;
+    color: white;
+}
+
+.home-btn:hover {
+    background: #24127b;
+}
+
+    </style>
+
+    <div class="success-container">
+        <h1>✅ Payment Successful!</h1>
+        <p>Thank you for your payment. Your booking is now confirmed. 🎉</p>
+
+        <div class="details-box">
+            <h2>Booking Summary</h2>
+            <p><strong>Name:</strong> <span id="userName"></span></p>
+            <p><strong>Destination:</strong> <span id="destination"></span></p>
+            <p><strong>Travel Date:</strong> <span id="travelDate"></span></p>
+            <p><strong>Number of People:</strong> <span id="numPeople"></span></p>
+            <p><strong>Total Paid:</strong> <span id="totalAmount"></span></p>
+        </div>
+
+        <p>A confirmation email has been sent to your registered email.</p>
+
+        <button onclick="window.print()" class="print-btn">🖨 Print Receipt</button>
+        <a href="index.html" class="home-btn">🏠 Back to Home</a>
+    </div>
+
+    <script>
+        // Retrieve stored booking details from sessionStorage
+        document.getElementById("userName").textContent = sessionStorage.getItem("userName");
+        document.getElementById("destination").textContent = sessionStorage.getItem("destination");
+        document.getElementById("travelDate").textContent = sessionStorage.getItem("travelDate");
+        document.getElementById("numPeople").textContent = sessionStorage.getItem("numPeople");
+        document.getElementById("totalAmount").textContent = "$" + sessionStorage.getItem("totalAmount");
+    </script>
+
+</body>
+</html>
